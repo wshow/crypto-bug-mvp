@@ -1,9 +1,15 @@
+import { getServerSession } from 'next-auth/next';
 import { ContextParams } from './helper';
+import { SignIn } from './signin';
 
-export default function Home({ params: { lang } }: ContextParams) {
+export default async function Home({ params: { lang } }: ContextParams) {
+  const session = await getServerSession();
   return (
     <>
-      <h1>Hello</h1>
+      {!session?.user && <SignIn />}
+      <pre>{JSON.stringify(session || '{}', null, 2)}</pre>
     </>
   );
 }
+
+export const runtime = 'edge';

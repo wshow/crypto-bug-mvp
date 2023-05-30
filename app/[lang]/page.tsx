@@ -3,7 +3,7 @@ import { ContextParams } from './helper';
 import { SignIn } from './signin';
 
 export default async function Home({ params: { lang } }: ContextParams) {
-  const session = await getServerSession();
+  const session = getServerSession();
   return (
     <>
       {!session?.user && <SignIn />}
